@@ -1,0 +1,44 @@
+/* HomeUp.CSS */
+main {
+	height: 100%;
+	margin-left: 2vw;
+	margin-right: 2vw;
+}
+
+#back2Top {
+    width: 4vw;
+    height: 5vw;
+    margin-right: 1vw;
+    overflow: hidden;
+  border: none;
+  border-radius: .5vw;
+  outline: none;
+    z-index: 999;
+    display: none;
+    cursor: pointer;
+  transition: opacity 2s ease-out, margin-right 1s ease-out;
+    position: fixed;
+    bottom: 2vw;
+    right: 0;
+    background-color: #DDf;
+  color: #00f;
+    text-align: center;
+}
+
+#upArrow {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto Slab';
+  font-size: 5vw;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  top: .3vw;
+  bottom: .4vw;
+}
+
+#back2Top:hover {
+    background-color: #fDF;
+    color: #0ff;
+}
+
