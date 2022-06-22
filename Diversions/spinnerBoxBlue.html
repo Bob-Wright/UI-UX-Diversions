@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta  charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spinner Example</title>
+</head>
+<body>
+<script src="./jquery.min.js"></script>
+<script>
+(function(){
+  "use strict";
+$(document).ready(function () {
+//$( window ).on( "load", function() {
+	$("#spinner").hide(0);
+	$("#isoblock").hide(0);
+	console.info( "we are ready!" );
+    //'use strict';
+ var showVPDetails = 0;
+ var viewportWidth = $(window).width();
+ var viewportHeight = $(window).height();
+	var message = "Right-click disabled"; 
+	function clickIE() {if (document.all) {(message);return false;}} 
+	function clickNS(e) {if 
+	(document.layers||(document.getElementById&&!document.all)) { 
+	if (e.which==2||e.which==3) {(message);return false;}}} 
+	if (document.layers) 
+	{document.captureEvents(Event.MOUSEDOWN);document.onmousedown = clickNS;} 
+	else{document.onmouseup = clickNS;document.oncontextmenu = clickIE;} 
+	document.oncontextmenu = new Function("return false");
+// scale the images to fill the viewport and keep aspect
+ if(showVPDetails == 1) {
+  var viewportWidth = $(window).width();
+  var vpWidth = parseInt(viewportWidth);
+    var fontSize = '3vw';
+    if(vpWidth <= 840) { fontSize = '4vw' } else { fontSize = '1.5vw' };
+	$("body").append('<div id="viewport-size" title="Viewport Size and Aspect" style="display:block;color:#fff;background:#08F;position:fixed;top:0;left:0;font-size:' + fontSize + ';z-index:20;"></div>');
+  var viewportHeight = $(window).height();
+  var vpHeight = parseInt(viewportHeight);
+  var VPaspectRatio = viewportWidth / viewportHeight;
+	var VPaspectRounded = (Math.round(VPaspectRatio * 100)) / 100;
+	  // console.info("rounded VP aspect " + VPaspectRounded);
+	$("#viewport-size").html('<div class="dimensions">' + viewportWidth + ' &times; ' + viewportHeight + ' px &amp; w/h = ' + 		VPaspectRounded + ' </div>');
+ }
+  var elWidth = parseInt(document.getElementById('content_img').width);
+  var elHeight = parseInt(document.getElementById('content_img').height);
+	 viewportWidth = parseInt(viewportWidth);
+	 viewportHeight = parseInt(viewportHeight);
+	var widthRatio = viewportWidth / elWidth;
+	var heightRatio = viewportHeight / elHeight;
+	var scale = widthRatio;
+	if (widthRatio * elHeight > viewportHeight) {
+		scale = heightRatio;};
+	var hsize  = Math.round(elWidth * scale);
+	var vsize = Math.round(elHeight * scale);
+  document.getElementById('content_img').width = hsize;
+  document.getElementById('content_img').height = vsize;
+
+  var spinnerWidth = 1800;
+  var spinnerHeight = 1800;
+	var spinnerhsize  = Math.round(spinnerWidth * scale);
+	var spinnervsize = Math.round(spinnerHeight * scale);
+  var spinnerLeft = (viewportWidth - spinnerhsize) / 2;
+  var spinnerTop = (viewportHeight - spinnervsize) / 2;
+  document.getElementById('spinner').style["width"] = spinnerhsize;
+  document.getElementById('spinner').style["left"] = spinnerLeft;
+  document.getElementById('spinner').style["height"] = spinnervsize;
+  document.getElementById('spinner').style["top"] = spinnerTop;
+  // console.info(spinnerhsize, spinnervsize);
+
+  var isoblockWidth = 1300;
+  var isoblockHeight = 1300;
+	var isoblockhsize  = Math.round(isoblockWidth * scale);
+	var isoblockvsize = Math.round(isoblockHeight * scale);
+  var isoblockLeft = (viewportWidth - isoblockhsize) / 2;
+  var isoblockTop = (viewportHeight - isoblockvsize) / 2;
+  document.getElementById('isoblock').style["width"] = isoblockhsize;
+  document.getElementById('isoblock').style["left"] = isoblockLeft;
+  document.getElementById('isoblock').style["height"] = isoblockvsize;
+  document.getElementById('isoblock').style["top"] = isoblockTop;
+	$("#spinner").show(0);
+	$("#isoblock").show(0);
+})
+})();
+</script>
+<style>
+* {
+ box-sizing: border-box;
+}
+@font-face {
+	font-family: "Roboto Slab";
+	src: url("./RobotoSlab-Regular.ttf") format("truetype");
+}
+html, body {
+  font: 14vw "Roboto Slab";
+  min-height: 100vh;
+  height: 100vh;
+  min-width: 100vw;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+top: 0px; left: 0px;
+cursor: pointer;
+background: black;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+#content_img {
+position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(90%);
+  background: rgba(255,255,255,0);
+  border-radius: 2vw;
+  border-top: 1vw solid rgb(14, 158, 248);
+  border-left: 1vw solid crimson;
+  box-shadow: 3vw 3vw 3vw -2vw white;
+  border-right: .5vw solid rgba(255, 255, 255, 0.467);
+  border-bottom: .5vw solid rgba(255, 255, 255, 0.467);
+  -webkit-backdrop-filter: blur(3vw);
+  backdrop-filter: blur(1vw);
+display: block;
+opacity: 1;
+}
+#spinner{
+position: absolute;
+opacity: 0;
+animation: rotateblock infinite 3s linear;
+}
+@keyframes rotateblock{
+  from{
+    transform:rotate(0deg);
+     fill: lightgreen;
+     stroke: blue;
+     stroke-width: .2vw;
+   opacity: 1;    }
+  to{
+    transform:rotate(360deg);
+     fill: lightskyblue;
+     stroke: green;
+     stroke-width: .2vw;
+    opacity: 1;
+  }
+  }
+#isoblock{
+position: absolute;
+opacity: 0;
+display: block;
+animation: rotation 15s ease;
+animation-delay: 9s;
+animation-direction: alternate;
+}
+@keyframes rotation{
+  from{
+    transform:rotate(0deg);
+     fill: lightskyblue;
+     opacity: 1;
+    }
+  to{
+    transform:rotate(360deg);
+     fill: rgb(235, 251, 8);
+     opacity: 1;
+  }
+  }
+.textmsg {
+/*display: block;*/
+position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+opacity: 0;
+z-index: 3;
+  -webkit-text-fill-color: orangered;
+  -webkit-text-stroke-width: .2vw;
+  -webkit-text-stroke-color: blue;
+  text-fill-color: orangered;
+  text-stroke-width: .2vw;
+  text-stroke-color: blue;
+  animation: fadein 9s ease;
+  animation-iteration-count: 1;
+}
+@keyframes fadein {
+  0% {
+  opacity: 0;
+  }
+  90% {
+  opacity: 1;
+  }
+  100% {
+  opacity: 0;
+  }
+}
+</style>
+
+<!-- <img id="content_img" src="./I_am_benevolent_square.jpg" width="1920px" height="1920px" alt="a long shot"> -->
+<img id="content_img" src="./bluegrad.jpg" width="1920px" height="1920px" alt="a long shot">
+<svg id="spinner" xmlns="http://www.w3.org/2000/svg" width="400" height="366" viewBox="0, 0, 400,366"><g><path d="M186.265 46.966 C 78.600 59.262,26.592 181.678,92.571 267.500 C 115.197 296.930,161.399 322.328,172.364 311.364 C 178.773 304.955,173.701 295.222,162.000 291.478 C 106.671 273.773,73.438 210.430,89.348 153.000 C 114.816 61.064,236.446 38.309,292.466 115.000 C 298.392 123.112,299.077 122.977,274.389 118.568 C 244.278 113.190,244.101 112.938,285.092 133.869 C 322.627 153.035,323.936 153.312,330.070 143.387 C 333.570 137.723,333.361 136.882,311.718 69.750 C 306.723 54.255,305.595 56.036,306.246 78.391 L 306.782 96.782 297.124 87.141 C 268.008 58.077,225.107 42.530,186.265 46.966 M283.381 271.541 C 280.011 276.685,286.512 282.561,291.040 278.464 C 293.228 276.483,293.637 272.037,291.800 270.200 C 289.665 268.065,285.192 268.777,283.381 271.541 M263.073 289.635 C 258.105 295.950,266.337 303.663,272.000 298.000 C 274.655 295.345,274.530 291.847,271.686 289.174 C 268.595 286.271,265.592 286.432,263.073 289.635 M183.500 301.208 C 180.310 303.037,179.066 305.239,179.032 309.114 C 178.946 318.845,192.620 321.426,195.733 312.266 C 198.322 304.649,190.239 297.343,183.500 301.208 M238.400 301.765 C 234.891 304.108,234.195 309.195,237.000 312.000 C 241.303 316.303,248.000 313.397,248.000 307.228 C 248.000 302.613,242.131 299.274,238.400 301.765 M209.321 304.167 C 208.123 304.758,206.619 306.504,205.980 308.047 C 202.770 315.798,212.332 322.534,217.992 316.508 C 223.860 310.262,216.937 300.408,209.321 304.167 " fill-rule="evenodd"></path></g></svg>
+<!-- my asymetric spinner arrow head svg!!
+<svg id="spinner" viewBox="0 0 16 16" class="arrow-clockwise" xmlns="http://www.w3.org/2000/svg" alt="arrow-clockwise">
+<path fill-rule="evenodd" d="M3.17 6.706a5 5 0 0 1 7.103-3.16.5.5 0 1 0 .454-.892A6 6 0 1 0 13.455 5.5a.5.5 0 0 0-.91.417 5 5 0 1 1-9.375.789z"/>
+  <path fill-rule="evenodd" d="M8.707 0l2.5 2.5a.5.5 0 0 1 0 .708l-2.5 2.5a.5.5 0 1 1-.707-.708L10.293 3 "/></svg>
+<svg id="spinner" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" alt="gear">
+  <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/> -->
+<!-- <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+</svg> -->
+<svg id="isoblock" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 180 180" style="enable-background:new 0 0 180 180;" xml:space="preserve" alt="isoblock">
+<g transform="translate(0.000000,180.000000) scale(0.100000,-0.100000)">
+	<path d="M517.8,1076l-2.4-190.8l18.8-64.7c22.1-76.6,43.8-151.9,65.1-225.7c8.6-29.6,17.2-56,19.8-58.5c2.9-4.1,74.7-6.2,332.4-9.3
+		l328.6-3.9l2.5,195.3l2.5,195.3l-22.5,76.6c-12.3,42.4-34.4,118.6-49.1,169.2c-14.7,50.2-27.9,93.5-29.1,95.6
+		c-1.3,2.1-141.8,5.4-333.2,7.6l-330.7,3.9L517.8,1076z M967.1,1058.8l52.9-172.6l-1.8-39.4l-1.8-39.4l-41.3,142.1l-41.8,142.1
+		l-76.1,0.9l-76.5,0.9l-2.5-91.5l-2-91.1l-118.8,2.2l-118.3,2.6l0.7,155.9c0.7,85.8,2,158.4,3.4,161.2c1.3,4.1,41.1,4.4,186.4,1.9
+		l184.6-3.4L967.1,1058.8z M1178.1,1180.2c8.2-28,28.6-99.2,45.8-158.5c17.2-59.7,31.1-109.9,31-112.4s-38.1-3.7-105.6-2.9l-106,1.3
+		l-28.3,91.8c-31.6,103.4-67.7,220.8-70.1,228.6c-1.2,3.7,22.3,4.7,108.6,3.6l110.2-1.3L1178.1,1180.2z M915,1059.4
+		c0-2.9,21.2-77.8,47-166.3s47.1-163.1,47-165.5c0-2.9-17.1-3.9-50-2.7l-50,1.8l-21.7,74.1c-36.4,124.8-74.9,260.2-74.8,262.7
+		c0,1.6,23.1,2.6,51.3,2.3C904,1065.3,915.1,1063.9,915,1059.4z M814.5,951.4c15.9-62.6,71.2-245,75.4-250.4
+		c3.4-3.7,22.6-5.2,77.7-5l73.1,0.4l2.5,91.5l2,91.1l109-1.3l109-1.3l-2.1-160l-2.1-160l-179,2.1l-179,2.1l-8.2,28
+		c-4.5,15.2-19.2,67.5-33.6,116.1c-13.9,48.6-32.3,112.8-41.3,142.9c-13.9,47.8-15.9,59.3-15.4,96.2c0.3,23,1.4,41,2.2,40.2
+		C805.5,983.1,810,968.3,814.5,951.4z M790.4,842.1c6.6-22.2,16-55.2,20.9-73.3c4.9-18.1,18.8-67.1,31.5-109.1
+		c12.3-42,23.3-81.1,24.9-87.7l2.4-11.1l-116.7,1.4l-116.7,1.4l-8.6,32.1c-10.2,39.1-78.1,274.2-81.4,282.9c-2.1,5.4,12,6,114.6,4.8
+		l117.1-1.4L790.4,842.1z"/>
+</g>
+</svg>
+<div class="textmsg"><b>Hello!</b></div>
+
+</body>
+</html>

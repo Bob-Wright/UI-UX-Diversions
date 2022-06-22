@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<!-- Code By Webdevtrick ( https://webdevtrick.com ) -->
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Long Drop Down Items | Webdevtrick.com</title>
+  <script src="../js/modernizr-dev.js"></script>
+<!--  <link rel="stylesheet" href="./style.css"> -->
+<style>
+@import url('https://fonts.googleapis.com/css?family=Sulphur+Point&display=swap');
+body{
+  margin: 0px;
+  padding: 0px;
+  background: #ff7011;
+  font-family: 'Sulphur Point', sans-serif;
+}
+
+h1{
+  margin: 1em 0px;
+  padding: 0px;
+  color: #fff;
+  text-align: center;
+  font-weight: 400;
+  font-size: 50px;
+}
+
+nav{
+  width: 750px;
+  margin: 1em auto;
+}
+
+ul{
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+}
+
+ul.dropdown{ 
+  position: relative; 
+  width: 100%; 
+}
+
+ul.dropdown li{ 
+  font-weight: bold; 
+  float: left; 
+  width: 180px; 
+  position: relative;
+  background: #ecf0f1;
+}
+
+ul.dropdown a:hover{ 
+  color: #000; 
+}
+
+ul.dropdown li a { 
+  display: block; 
+  padding: 20px 8px;
+  color: #34495e; 
+  position: relative; 
+  z-index: 2000; 
+  text-align: center;
+  text-decoration: none;
+  font-weight: 300;
+}
+
+ul.dropdown li a:hover,
+ul.dropdown li a.hover{ 
+  background: #3498db;
+  position: relative;
+  color: #fff;
+}
+
+ul.dropdown ul{ 
+ display: none;
+ position: absolute; 
+  top: 0; 
+  left: 0; 
+  width: 180px; 
+  z-index: 1000;
+}
+
+ul.dropdown ul li { 
+  font-weight: normal; 
+  background: #f6f6f6; 
+  color: #000; 
+  border-bottom: 1px solid #ccc; 
+}
+
+ul.dropdown ul li a{ 
+  display: block; 
+  color: #34495e !important;
+  background: #eee !important;
+} 
+
+ul.dropdown ul li a:hover{
+  display: block; 
+  background: #3498db !important;
+  color: #fff !important;
+} 
+
+.drop > a{
+  position: relative;
+}
+
+.drop > a:after{
+  content:"";
+  position: absolute;
+  right: 10px;
+  top: 40%;
+  border-left: 5px solid transparent;
+  border-top: 5px solid #333;
+  border-right: 5px solid transparent;
+  z-index: 999;
+}
+
+.drop > a:hover:after{
+  content:"";
+   border-left: 5px solid transparent;
+  border-top: 5px solid #fff;
+  border-right: 5px solid transparent;
+}
+
+</style>
+</head>
+<body>
+<h1>Long Drop Down Items Scroll</h1>
+<nav>
+<ul class="dropdown">
+        	<li class="drop"><a href="#">Coding</a>
+        		<ul class="subItems">
+							<li><a href="#">HTML</a></li>
+							<li><a href="#">CSS</a></li>
+							<li><a href="#">JavaScript</a></li>
+							<li><a href="#">PHP</a></li>
+							<li><a href="#">jQuery</a></li>
+							<li><a href="#">React JS</a></li>
+							<li><a href="#">Angular</a></li>
+							<li><a href="#">Vue JS</a></li>
+							<li><a href="#">Node JS</a></li>
+							<li><a href="#">Redux</a></li>
+							<li><a href="#">ASP .net</a></li>
+							<li><a href="#">Python</a></li>
+							<li><a href="#">Ruby</a></li>
+							<li><a href="#">D3 JS</a></li>
+							<li><a href="#">Laravel</a></li>
+							<li><a href="#">Codintiger</a></li>
+							<li><a href="#">Java</a></li>
+							<li><a href="#">Kotlin</a></li>
+							<li><a href="#">C++</a></li>
+							<li><a href="#">Ploymer JS</a></li>
+							<li><a href="#">Yii 2</a></li>
+							<li><a href="#">On Rails</a></li>
+							<li><a href="#">Express JS</a></li>
+        		</ul>
+        	</li>
+        	<li class="drop"><a href="#">Marketing</a>
+        		<ul class="subItems">
+        			        <li><a href="#">SEO</a></li>
+							<li><a href="#">Search Engine</a></li>
+							<li><a href="#">Social Media</a></li>
+							<li><a href="#">Video</a></li>
+							<li><a href="#">Advertisement</a></li>
+							<li><a href="#">Adwords</a></li>
+							<li><a href="#">Fb Audience</a></li>
+							<li><a href="#">Guest Articles</a></li>
+							<li><a href="#">Boost</a></li>
+							<li><a href="#">Instagram</a></li>
+							<li><a href="#">Doubleclick</a></li>
+							<li><a href="#">Direct</a></li>
+							<li><a href="#">Bing Ads</a></li>
+							<li><a href="#">Admob</a></li>
+							<li><a href="#">Branding</a></li>
+							
+        		</ul>
+        	</li>
+        	<li class="drop"><a href="#">CMS</a>
+        		<ul class="subItems">
+        			        <li><a href="#">Wordpress</a></li>
+							<li><a href="#">Drupal</a></li>
+							<li><a href="#">Magento</a></li>
+							<li><a href="#">Shopify</a></li>
+							<li><a href="#">WIX</a></li>
+        		</ul>
+        	</li>
+			<li class="drop"><a href="#">Webmaster</a>
+				<ul class="subItems">
+					<li><a href="#">Google</a></li>
+					<li><a href="#">Bing</a></li>
+					<li><a href="#">Yandex</a></li>
+					<li><a href="#">Baidu</a></li>
+		        </ul>
+        	</li>
+        </ul>
+</nav>
+
+  <script src='../js/jquery.min.js'></script>
+<!--  <script  src="function.js"></script> -->
+<script>
+
+/*  Code By Webdevtrick ( https://webdevtrick.com )  */
+
+var maxHeight = 400;
+
+$(function(){
+
+    $(".dropdown > li").hover(function() {
+    
+         var $container = $(this),
+             $list = $container.find("ul"),
+             $anchor = $container.find("a"),
+             height = $list.height() * 1.1,       
+             multiplier = height / maxHeight;   
+
+             $container.data("origHeight", $container.height());
+        
+
+             $anchor.addClass("hover");
+        
+
+             $list
+            .show()
+            .css({
+                paddingTop: $container.data("origHeight")
+            });
+        
+
+            if (multiplier > 1) {
+            $container
+                .css({
+                    height: maxHeight,
+                    overflow: "hidden"
+                })
+                .mousemove(function(e) {
+                    var offset = $container.offset();
+                    var relativeY = ((e.pageY - offset.top) * multiplier) - ($container.data("origHeight") * multiplier);
+                    if (relativeY > $container.data("origHeight")) {
+                        $list.css("top", -relativeY + $container.data("origHeight"));
+                    };
+                });
+        }
+        
+    }, function() {
+    
+        var $el = $(this);
+        
+        $el
+            .height($(this).data("origHeight"))
+            .find("ul")
+            .css({ top: 0 })
+            .hide()
+            .end()
+            .find("a")
+            .removeClass("hover");
+    
+    });  
+    
+});
+</script>
+</body>
+</html>

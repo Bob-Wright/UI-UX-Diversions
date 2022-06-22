@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Bill 🚀👽 🌀  Paxton Tribute - Glow Text</title>
+
+<style>
+@import url("https://fonts.googleapis.com/css?family=Audiowide|Monoton|Quantico:700");
+body {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-color: RGB(24, 25, 26);
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+          align-items: center;
+  position: relative;
+}
+body:before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: url("../Images/rainbow-nebula.jpg");
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  z-index: -1;
+  opacity: .35;
+}
+
+#textBox {
+  max-width: 70%;
+  display: block;
+  height: auto;
+  margin: 0 auto;
+  text-align: center;
+  color: whitesmoke;
+  line-height: 110%;
+/*  font-variant: small-caps; */
+  font-family: 'Audiowide';
+  font-size: calc(5px + 6vw);
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+          flex-flow: row wrap;
+  -webkit-box-pack: center;
+          justify-content: center;
+}
+#textBox .textSec {
+  margin: 0 15px 0 15px;
+}
+#textBox .textSec span {
+  -webkit-transition: all .1s ease;
+  transition: all .1s ease;
+  margin: .5px;
+  -webkit-filter: brightness(120%);
+}
+</style>
+
+</head>
+
+<body translate="no" >
+  <div id="textBox">
+  <div class="textSec"><span class="text">T</span><span class="text">h</span><span class="text">a</span><span class="text">t</span><span class="text">&apos;</span><span class="text">s</span></div>
+  <div class="textSec"><span class="text">i</span><span class="text">t</span><span class="text">,</span></div>
+  <div class="textSec"><span class="text">m</span><span class="text">a</span><span class="text">n</span><span class="text">.</span></div>
+  <div class="textSec"><span class="text">G</span><span class="text">a</span><span class="text">m</span><span class="text">e</span></div>
+  <div class="textSec"><span class="text">o</span><span class="text">v</span><span class="text">e</span><span class="text">r</span><span class="text">,</span></div>
+  <div class="textSec"><span class="text">m</span><span class="text">a</span><span class="text">n</span><span class="text">.</span></div>
+  <div class="textSec"><span class="text">G</span><span class="text">a</span><span class="text">m</span><span class="text">e</span></div>
+  <div class="textSec"><span class="text">o</span><span class="text">v</span><span class="text">e</span><span class="text">r</span><span class="text">!</span></div>
+  <div class="textSec"><span class="text">W</span><span class="text">h</span><span class="text">a</span><span class="text">t</span></div>
+  <div class="textSec"><span class="text">t</span><span class="text">h</span><span class="text">e</span></div>
+  <div class="textSec"><span class="text">*</span><span class="text">*</span><span class="text">*</span><span class="text">*</span></div>
+  <div class="textSec"><span class="text">a</span><span class="text">r</span><span class="text">e</span></div>
+  <div class="textSec"><span class="text">w</span><span class="text">e</span></div>
+  <div class="textSec"><span class="text">g</span><span class="text">o</span><span class="text">n</span><span class="text">n</span><span class="text">a</span></div>
+  <div class="textSec"><span class="text">d</span><span class="text">o</span></div>
+  <div class="textSec"><span class="text">n</span><span class="text">o</span><span class="text">w</span><span class="text">?</span></div>
+  <div class="textSec"><span class="text">W</span><span class="text">h</span><span class="text">a</span><span class="text">t</span></div>
+  <div class="textSec"><span class="text">a</span><span class="text">r</span><span class="text">e</span></div>
+  <div class="textSec"><span class="text">w</span><span class="text">e</span></div>
+  <div class="textSec"><span class="text">g</span><span class="text">o</span><span class="text">n</span><span class="text">n</span><span class="text">a</span></div>
+  <div class="textSec"><span class="text">d</span><span class="text">o</span><span class="text">?</span></div>
+</div>
+
+<script id="rendered-js" >
+var otTitle = document.getElementById("textBox"),
+sSpan = document.getElementsByClassName('text').length,
+letters = document.getElementsByClassName('text'),
+whichLetter = 0,
+trailAmount = 7;
+
+
+//Used to get random colors
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+//Animate color change 
+setInterval(function () {
+  var rColor = getRandomColor();
+  var tColor = getRandomColor();
+  if (whichLetter < sSpan + trailAmount) {
+    if (whichLetter > trailAmount - 1) {
+      letters[whichLetter - trailAmount].style.color = 'whitesmoke';
+    }
+    if (whichLetter < sSpan) {
+      letters[whichLetter].style.color = rColor;
+      letters[whichLetter].style.textShadow = '0px 0px 10px ' + tColor;
+    }
+    whichLetter++;
+  } else if (whichLetter > sSpan + (trailAmount - 1)) whichLetter = 0;
+}, 75);
+//# sourceURL=pen.js
+</script>
+</body>
+</html>

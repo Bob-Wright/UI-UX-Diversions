@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+	<TITLE>Browser scrollbar Evaluator</TITLE>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<link href="https://fonts.googleapis.com/css?family=Merriweather|Roboto|Roboto+Slab:400,700|Roboto+Black:400,700|Rubik:700" rel="stylesheet" type='text/css'>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<META NAME="Date&TimeLastModified" CONTENT="Sun 01/21/2018 18:32">
+	<META name=description content="browser width, height, and scrollbar width in this browser window>
+	<META name="copyright" content="Copyright 2018 by Bob Wright">
+	<META name="author" content="Bob Wright">
+	<META name=keywords content="art">
+	<meta name="rating" content="general">
+	<meta name="robots" content="index, follow"/> 
+<!-- <base href="http://www.isoblock.com/"> -->
+	<base href"files://D:/Users/Wright/MyWebCode/IsoBlockWebsite/">
+	<link href="./CSS/normalize.css" media="screen" rel="stylesheet" type="text/css"/>
+    <link href="./CSS/main.css" rel="stylesheet">
+<!--	<link href="./CSS/test.css" media="screen" rel="stylesheet" type="text/css"/> -->
+<!--	<link href="./CSS/SiteStylestest.css" media="screen" rel="stylesheet" type="text/css"/> -->
+<!--	<link href="./CSS/iconic.css" media="screen" rel="stylesheet" type="text/css"/> -->
+<!--	<link href="./CSS/gallery.css" media="screen" rel="stylesheet" type="text/css"/> -->
+<!--    <link rel="manifest" href="site.webmanifest"> -->
+	<link rel="icon" href="./favicon.ico" type="image/ico"/>
+	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon"/>
+    <style type="text/css">
+      body{font-family: Roboto Slab,sans-serif;font-size:20px;}
+      a, a:visited{color:blue;text-decoration:none;}
+      h1{font-size:21px; margin:20px;}
+      #contentB{max-height:100px;overflow:scroll;}
+    </style>
+<!-- =========================== -->
+<!-- Java script section -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="js/modernizr-3.5.0.min.js"></script>
+<script src="js/jquery.min.js"></script>
+<!-- <script src="js/prefix-free.js"></script> -->
+<!-- <script src="https://code.jquery.com/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script> -->
+<!-- <script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script> -->
+<!-- <script src="js/plugins.js"></script> -->
+<!-- <script src="js/main.js"></script> -->
+<!-- generic sticky functions -->
+<!-- <script src="js/stickUp.js"></script> -->
+
+    <script>
+//initiating jQuery
+	jQuery(function($) {
+var txt = "";
+txt += "<p>This browser's content area is [innerWidth] " + window.innerWidth + " pixels wide and ";
+txt += window.innerHeight + " pixels high [innerHeight]" + "</p>";
+txt += "<p>This browser's window with toolbars/scrollbars is [outerWidth] " + window.outerWidth + " pixels wide and ";
+txt += window.outerHeight + " pixels high [outerHeight]" + "</p>";
+txt += "<p>Using these values this browser's scrollbar is [outerWidth-innerWidth] " + (window.outerWidth-window.innerWidth) + " pixels wide." + "</p>";
+
+document.getElementById("demo").innerHTML = txt;
+	    });
+
+	jQuery(function($) {
+      $(function() {    
+			var widthContent = $("#content").width();
+            var widthContentC = $("#contentC").width();
+            var theDifference =  Math.round(widthContent - widthContentC);
+            var contentMsg = "Using the content width to calculate the scrollbars, for this browser they are " + theDifference + " pixels wide.";
+            $('#usableArea').text(contentMsg);
+            // $("#contentB").css("display","none"); //
+      });
+	    });
+</script>
+
+<!-- end script-->
+<!-- End of the Java script section-->
+<!-- End of the HTML head section-->
+</head>
+<body id="browserWindow">
+  <h1><div id="demo"></div></h1>
+  <div id="content" class="pw">
+	<p>in the html below one div is nested in another div with a scrollbar so we<br>query the contents and then use some basic math to get the scrollbar width.</p>
+  </div>
+  <div id="contentB"><img src="./isoblock.gif" width=161px height=128px>
+    <div id="contentC">This div is nested in another div with a scrollbar so we use some basic math to get the scrollbar width.</div>
+  </div>
+    <h1 id="usableArea">&nbsp;This page requires a javascript enabled device to work...</h1>
+	<p>More information about the <a href="https://www.textfixer.com/tutorials/browser-scrollbar-width.php">width of browser scrollbars</a> can be found here. Thanks TextFixer!</p>
+	<p>This page was adapted from the demo <a href="https://www.textfixer.com/tutorials/scrollbar-pixel-width-test.php">scrollbar-pixel-width-test</a> from that site.</p>
+	<p>In addition to adding the display of the browser window size, the display of the contents that we query are left visible and<br> normalizing CSS was used to defeat the default margins and padding so the scrollbar is at the viewport edge<br>without any offsets/displacement. Also the value (in pixels) of the scrollbar width is rounded to the nearest integer value.</p>
+
+<!-- +++++++++++++++++++++++ -->
+<!-- End of the web page -->
+</body>
+</html>
+</body>
+</html>

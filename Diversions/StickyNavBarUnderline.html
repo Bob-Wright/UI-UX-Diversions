@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<!--Code By Webdevtrick ( https://webdevtrick.com )-->
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Sticky Navigation Bar | Webdevtrick.com</title>
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
+  <link rel="stylesheet" href="../CSS/normalize.css">
+<!-- <link rel="stylesheet" href="style.css"> -->
+<style>
+/* Code By Webdevtrick ( https://webdevtrick.com ) */
+body {
+  font-family: "Century Gothic", 'Lato', sans-serif;
+}
+a {
+  text-decoration: none;
+}
+.nav-items,
+.bottom-slide {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+  background: #eee;
+  text-align: center;
+  padding: 0 2em;
+}
+.nav-items h1,
+.bottom-slide h1 {
+  font-size: 2rem;
+  margin: 0;
+  letter-spacing: 1rem;
+  color: #ff5f14;
+}
+.nav-items h3,
+.bottom-slide h3 {
+  font-size: 1rem;
+  letter-spacing: 0.3rem;
+  opacity: 0.6;
+}
+.items-container {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 70px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  z-index: 10;
+}
+.items-container--top {
+  position: fixed;
+  top: 0;
+}
+.navs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  color: #212121;
+  letter-spacing: 0.1rem;
+  transition: all 0.5s ease;
+  font-size: 0.8rem;
+}
+.navs:hover {
+  color: white;
+  background: rgb(255,95,20, 0.8);
+  transition: all 0.5s ease;
+}
+.bottom-slider {
+  position: absolute;
+  bottom: 0;
+  width: 0;
+  height: 6px;
+  background: #ff5f14;
+  transition: left 0.3s ease;
+}
+
+@media (min-width: 800px) {
+  .nav-items h1,
+  .bottom-slide h1 {
+    font-size: 3rem;
+  }
+  .nav-items h3,
+  .bottom-slide h3 {
+    font-size: 1rem;
+  }
+
+  .navs {
+    font-size: 1rem;
+  }
+}
+@media (max-width: 765px) {
+  .nav-items h1, .bottom-slide h1 {
+    letter-spacing: 0ch;
+  }
+}
+</style>
+</head>
+<body>
+
+  
+<section class="nav-items">
+    <h1>STICKY NAVIGATION BAR</h1>
+    <h3>Sticky Nav With Sliding Nav</h3>
+    <div class="items-container">
+      <a class="navs" href="#sec-html">HTML</a>
+      <a class="navs" href="#sec-css">CSS</a>
+      <a class="navs" href="#sec-js">JavaScript</a>
+      <a class="navs" href="#sec-php">PHP</a>
+      <a class="navs" href="#sec-sql">MySQL</a>
+      <span class="bottom-slider"></span>
+    </div>
+  </section>
+
+
+  <main class="content">
+    <section class="bottom-slide" id="sec-html">
+      <h1>HTML</h1>
+      <h3>topics about HTML</h3>
+    </section>
+    <section class="bottom-slide" id="sec-css">
+      <h1>CSS</h1>
+      <h3>topics about CSS</h3>
+    </section>
+    <section class="bottom-slide" id="sec-js">
+      <h1>JavaScript</h1>
+      <h3>topics about JavaScript</h3>
+    </section>
+    <section class="bottom-slide" id="sec-php">
+      <h1>PHP</h1>
+      <h3>topics about PHP</h3>
+    </section>
+    <section class="bottom-slide" id="sec-sql">
+      <h1>MySQL</h1>
+      <h3>topics about MySQL</h3>
+    </section>
+  </main>
+
+  <script src='../js/jquery.min.js'></script>
+<!-- <script  src="function.js"></script> -->
+<script>
+// Code By Webdevtrick ( https://webdevtrick.com )
+class StickyNavigation {
+	
+	constructor() {
+		this.currentId = null;
+		this.currentTab = null;
+		this.tabContainerHeight = 70;
+		let self = this;
+		$('.navs').click(function() { 
+			self.onTabClick(event, $(this)); 
+		});
+		$(window).scroll(() => { this.onScroll(); });
+		$(window).resize(() => { this.onResize(); });
+	}
+	
+	onTabClick(event, element) {
+		event.preventDefault();
+		let scrollTop = $(element.attr('href')).offset().top - this.tabContainerHeight + 1;
+		$('html, body').animate({ scrollTop: scrollTop }, 600);
+	}
+	
+	onScroll() {
+		this.checkTabContainerPosition();
+    this.findCurrentTabSelector();
+	}
+	
+	onResize() {
+		if(this.currentId) {
+			this.setSliderCss();
+		}
+	}
+	
+	checkTabContainerPosition() {
+		let offset = $('.nav-items').offset().top + $('.nav-items').height() - this.tabContainerHeight;
+		if($(window).scrollTop() > offset) {
+			$('.items-container').addClass('items-container--top');
+		} 
+		else {
+			$('.items-container').removeClass('items-container--top');
+		}
+	}
+	
+	findCurrentTabSelector(element) {
+		let newCurrentId;
+		let newCurrentTab;
+		let self = this;
+		$('.navs').each(function() {
+			let id = $(this).attr('href');
+			let offsetTop = $(id).offset().top - self.tabContainerHeight;
+			let offsetBottom = $(id).offset().top + $(id).height() - self.tabContainerHeight;
+			if($(window).scrollTop() > offsetTop && $(window).scrollTop() < offsetBottom) {
+				newCurrentId = id;
+				newCurrentTab = $(this);
+			}
+		});
+		if(this.currentId != newCurrentId || this.currentId === null) {
+			this.currentId = newCurrentId;
+			this.currentTab = newCurrentTab;
+			this.setSliderCss();
+		}
+	}
+	
+	setSliderCss() {
+		let width = 0;
+		let left = 0;
+		if(this.currentTab) {
+			width = this.currentTab.css('width');
+			left = this.currentTab.offset().left;
+		}
+		$('.bottom-slider').css('width', width);
+		$('.bottom-slider').css('left', left);
+	}
+	
+}
+new StickyNavigation();
+</script>
+</body>
+</html>

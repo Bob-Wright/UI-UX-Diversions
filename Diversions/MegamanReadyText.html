@@ -1,0 +1,538 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Megaman READY!</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: -webkit-box;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  -webkit-box-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+          align-items: center;
+  background-image: -webkit-gradient(linear, left bottom, left top, from(#c6c6c6), color-stop(10vh, #ffffff), color-stop(10vh, #e7e7e7), to(#EEE));
+  background-image: linear-gradient(to top, #c6c6c6, #ffffff 10vh, #e7e7e7 10vh, #EEE);
+}
+
+.ready {
+  display: grid;
+  grid-gap: 25px;
+  grid-template-columns: repeat(5, 1fr);
+  -webkit-animation: lateral 6000ms linear infinite both;
+          animation: lateral 6000ms linear infinite both;
+  -webkit-animation-delay: 625ms;
+          animation-delay: 625ms;
+}
+
+.R {
+  grid-template-areas: "a1 a6 a8" "a2 . a9" "a3 a7 ." "a4 . a10" "a5 . a11";
+}
+.R > :nth-child(8),
+.R > :nth-child(9) {
+  top: 12.5px;
+  position: relative;
+}
+.R > :nth-child(10) {
+  left: -12.5px;
+  position: relative;
+}
+
+.E {
+  grid-template-areas: "a1 a6 a9" "a2 . ." "a3 a7 a10" "a4 . ." "a5 a8 a11";
+}
+
+.A {
+  grid-template-areas: ". a1 ." "a2 . a7" "a3 . a8" "a4 a6 a9" "a5 . a10";
+}
+.A > :nth-child(2) {
+  left: 12.5px;
+  position: relative;
+}
+.A > :nth-child(7) {
+  left: -12.5px;
+  position: relative;
+}
+
+.D {
+  grid-template-areas: "a1 a6 a8" "a2 . a9" "a3 . a10" "a4 . a11" "a5 a7 .";
+}
+.D > :nth-child(n + 8) {
+  top: 12.5px;
+  position: relative;
+}
+
+.Y {
+  grid-template-areas: "a1 . a6" "a2 . a7" "a3 . a8" ". a4 ." ". a5 .";
+}
+.Y > :nth-child(3) {
+  left: 12.5px;
+  position: relative;
+}
+.Y > :nth-child(8) {
+  left: -12.5px;
+  position: relative;
+}
+
+.letter {
+  display: grid;
+  grid-gap: 4px;
+}
+
+.block {
+  --ratio: calc(var(--index) / 50);
+  --delay: calc(calc(var(--ratio) * 625ms) + 625ms);
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-transform: rotate(calc(var(--angle) * 1deg)) translate3d(calc(var(--sign) * 200vw), 0, 0) rotate3d(1, 0, 0, -90deg) rotate3d(0, 1, 0, 90deg);
+          transform: rotate(calc(var(--angle) * 1deg)) translate3d(calc(var(--sign) * 200vw), 0, 0) rotate3d(1, 0, 0, -90deg) rotate3d(0, 1, 0, 90deg);
+  -webkit-animation-name: block-intro;
+          animation-name: block-intro;
+  -webkit-animation-timing-function: ease-in;
+          animation-timing-function: ease-in;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-delay: var(--delay);
+          animation-delay: var(--delay);
+  animation-direction: reverse;
+  -webkit-animation-duration: 6000ms;
+          animation-duration: 6000ms;
+  position: relative;
+  z-index: -1;
+  height: 25px;
+  width: 25px;
+  will-change: transform;
+}
+.block .face {
+  display: block;
+  position: absolute;
+  background-color: #2e92de;
+  -webkit-backface-visibility: visible;
+          backface-visibility: visible;
+  width: 25px;
+  height: 25px;
+  border: solid 1px #2f454f;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+          align-items: center;
+}
+.block .face-1 {
+  -webkit-transform-origin: bottom center;
+          transform-origin: bottom center;
+}
+.block .face-2 {
+  -webkit-transform: rotateX(-90deg);
+          transform: rotateX(-90deg);
+  -webkit-transform-origin: bottom center;
+          transform-origin: bottom center;
+  overflow: hidden;
+}
+.block .face-2:before {
+  content: '';
+  position: absolute;
+  background-color: #00d2ff99;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-animation: shimmer 6000ms linear;
+          animation: shimmer 6000ms linear;
+  -webkit-animation-delay: var(--delay);
+          animation-delay: var(--delay);
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+}
+.block .face-3 {
+  -webkit-transform: rotateY(90deg);
+          transform: rotateY(90deg);
+  -webkit-transform-origin: right center;
+          transform-origin: right center;
+}
+
+@-webkit-keyframes block-intro {
+  40% {
+    -webkit-transform: rotate(0deg) translate3d(0, 0, 0) rotate3d(1, 0, 0, -90deg) rotate3d(0, 1, 0, 90deg);
+            transform: rotate(0deg) translate3d(0, 0, 0) rotate3d(1, 0, 0, -90deg) rotate3d(0, 1, 0, 90deg);
+    -webkit-animation-timing-function: cubic-bezier(0.95, 0.05, 0.8, 0.04);
+            animation-timing-function: cubic-bezier(0.95, 0.05, 0.8, 0.04);
+  }
+  70% {
+    -webkit-transform: rotate(0deg) translate3d(0, 0, 0) rotate3d(1, 0, 0, -90deg) rotate3d(0, 1, 0, 90deg);
+            transform: rotate(0deg) translate3d(0, 0, 0) rotate3d(1, 0, 0, -90deg) rotate3d(0, 1, 0, 90deg);
+    -webkit-animation-timing-function: linear;
+            animation-timing-function: linear;
+  }
+  80% {
+    -webkit-transform: rotate(0deg) translate3d(0, 0, 0) rotate3d(1, 0, 0, 0deg) rotate3d(0, 1, 0, 0deg);
+            transform: rotate(0deg) translate3d(0, 0, 0) rotate3d(1, 0, 0, 0deg) rotate3d(0, 1, 0, 0deg);
+    -webkit-animation-timing-function: linear;
+            animation-timing-function: linear;
+  }
+  100% {
+    -webkit-transform: rotate(0deg) translate3d(150vw, 0, 0) rotate3d(1, 0, 0, 0deg) rotate3d(0, 1, 0, 0deg);
+            transform: rotate(0deg) translate3d(150vw, 0, 0) rotate3d(1, 0, 0, 0deg) rotate3d(0, 1, 0, 0deg);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+}
+
+@keyframes block-intro {
+  40% {
+    -webkit-transform: rotate(0deg) translate3d(0, 0, 0) rotate3d(1, 0, 0, -90deg) rotate3d(0, 1, 0, 90deg);
+            transform: rotate(0deg) translate3d(0, 0, 0) rotate3d(1, 0, 0, -90deg) rotate3d(0, 1, 0, 90deg);
+    -webkit-animation-timing-function: cubic-bezier(0.95, 0.05, 0.8, 0.04);
+            animation-timing-function: cubic-bezier(0.95, 0.05, 0.8, 0.04);
+  }
+  70% {
+    -webkit-transform: rotate(0deg) translate3d(0, 0, 0) rotate3d(1, 0, 0, -90deg) rotate3d(0, 1, 0, 90deg);
+            transform: rotate(0deg) translate3d(0, 0, 0) rotate3d(1, 0, 0, -90deg) rotate3d(0, 1, 0, 90deg);
+    -webkit-animation-timing-function: linear;
+            animation-timing-function: linear;
+  }
+  80% {
+    -webkit-transform: rotate(0deg) translate3d(0, 0, 0) rotate3d(1, 0, 0, 0deg) rotate3d(0, 1, 0, 0deg);
+            transform: rotate(0deg) translate3d(0, 0, 0) rotate3d(1, 0, 0, 0deg) rotate3d(0, 1, 0, 0deg);
+    -webkit-animation-timing-function: linear;
+            animation-timing-function: linear;
+  }
+  100% {
+    -webkit-transform: rotate(0deg) translate3d(150vw, 0, 0) rotate3d(1, 0, 0, 0deg) rotate3d(0, 1, 0, 0deg);
+            transform: rotate(0deg) translate3d(150vw, 0, 0) rotate3d(1, 0, 0, 0deg) rotate3d(0, 1, 0, 0deg);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+}
+@-webkit-keyframes lateral {
+  from {
+    -webkit-transform: translateX(12%);
+            transform: translateX(12%);
+  }
+  to {
+    -webkit-transform: translateX(-12%);
+            transform: translateX(-12%);
+  }
+}
+@keyframes lateral {
+  from {
+    -webkit-transform: translateX(12%);
+            transform: translateX(12%);
+  }
+  to {
+    -webkit-transform: translateX(-12%);
+            transform: translateX(-12%);
+  }
+}
+@-webkit-keyframes shimmer {
+  from, 25% {
+    -webkit-transform: scale(2, 1) rotate(-45deg) translate(-100%);
+            transform: scale(2, 1) rotate(-45deg) translate(-100%);
+  }
+  35%, to {
+    -webkit-transform: scale(2, 1) rotate(-45deg) translate(0%);
+            transform: scale(2, 1) rotate(-45deg) translate(0%);
+  }
+}
+@keyframes shimmer {
+  from, 25% {
+    -webkit-transform: scale(2, 1) rotate(-45deg) translate(-100%);
+            transform: scale(2, 1) rotate(-45deg) translate(-100%);
+  }
+  35%, to {
+    -webkit-transform: scale(2, 1) rotate(-45deg) translate(0%);
+            transform: scale(2, 1) rotate(-45deg) translate(0%);
+  }
+}
+</style>
+
+</head>
+<body translate="no">
+<div class="ready">
+<div class="letter R">
+<div class="block" style="--index:0;--angle:0;--sign:-1;grid-area:a1;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:1;--angle:147;--sign:1;grid-area:a2;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:2;--angle:294;--sign:-1;grid-area:a3;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:3;--angle:81;--sign:1;grid-area:a4;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:4;--angle:228;--sign:-1;grid-area:a5;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:5;--angle:15;--sign:1;grid-area:a6;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:6;--angle:162;--sign:-1;grid-area:a7;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:7;--angle:309;--sign:1;grid-area:a8;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:8;--angle:96;--sign:-1;grid-area:a9;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:9;--angle:243;--sign:1;grid-area:a10;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:10;--angle:30;--sign:-1;grid-area:a11;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+</div>
+<div class="letter E">
+<div class="block" style="--index:11;--angle:-177;--sign:1;grid-area:a1;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:12;--angle:-324;--sign:-1;grid-area:a2;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:13;--angle:-111;--sign:1;grid-area:a3;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:14;--angle:-258;--sign:-1;grid-area:a4;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:15;--angle:-45;--sign:1;grid-area:a5;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:16;--angle:-192;--sign:-1;grid-area:a6;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:17;--angle:-339;--sign:1;grid-area:a7;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:18;--angle:-126;--sign:-1;grid-area:a8;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:19;--angle:-273;--sign:1;grid-area:a9;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:20;--angle:-60;--sign:-1;grid-area:a10;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:21;--angle:-207;--sign:1;grid-area:a11;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+</div>
+<div class="letter A">
+<div class="block" style="--index:22;--angle:354;--sign:-1;grid-area:a1;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:23;--angle:141;--sign:1;grid-area:a2;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:24;--angle:288;--sign:-1;grid-area:a3;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:25;--angle:75;--sign:1;grid-area:a4;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:26;--angle:222;--sign:-1;grid-area:a5;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:27;--angle:9;--sign:1;grid-area:a6;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:28;--angle:156;--sign:-1;grid-area:a7;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:29;--angle:303;--sign:1;grid-area:a8;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:30;--angle:90;--sign:-1;grid-area:a9;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:31;--angle:237;--sign:1;grid-area:a10;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+</div>
+<div class="letter D">
+<div class="block" style="--index:32;--angle:-24;--sign:-1;grid-area:a1;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:33;--angle:-171;--sign:1;grid-area:a2;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:34;--angle:-318;--sign:-1;grid-area:a3;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:35;--angle:-105;--sign:1;grid-area:a4;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:36;--angle:-252;--sign:-1;grid-area:a5;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:37;--angle:-39;--sign:1;grid-area:a6;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:38;--angle:-186;--sign:-1;grid-area:a7;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:39;--angle:-333;--sign:1;grid-area:a8;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:40;--angle:-120;--sign:-1;grid-area:a9;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:41;--angle:-267;--sign:1;grid-area:a10;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:42;--angle:-54;--sign:-1;grid-area:a11;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+</div>
+<div class="letter Y">
+<div class="block" style="--index:43;--angle:201;--sign:1;grid-area:a1;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:44;--angle:348;--sign:-1;grid-area:a2;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:45;--angle:135;--sign:1;grid-area:a3;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:46;--angle:282;--sign:-1;grid-area:a4;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:47;--angle:69;--sign:1;grid-area:a5;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:48;--angle:216;--sign:-1;grid-area:a6;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:49;--angle:3;--sign:1;grid-area:a7;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+<div class="block" style="--index:50;--angle:150;--sign:-1;grid-area:a8;">
+<div class="face face-1"></div>
+<div class="face face-2"></div>
+<div class="face face-3"></div>
+</div>
+</div>
+</div>
+</body>
+</html>

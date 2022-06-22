@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <head>
+    <meta charset="utf-8">
+    <title>Bouncing balls</title>
+<style>
+html, body {
+  margin: 0;
+  height: 100%;
+}
+html {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+body {
+  overflow: hidden;
+  height: inherit;
+  margin: 0;
+}
+canvas {
+  display: block;
+}
+#background {
+position: absolute;
+font-size: 2.5vw;
+width: 15vw;
+height: 4vw;
+top: 5px;
+left: 5px;
+}
+#evilcircle {
+position: absolute;
+font-size: 2.5vw;
+width: 15vw;
+height: 4vw;
+top: 5vw;
+left: 5px;
+}
+h1 {
+  font-size: 4vw;
+  letter-spacing: -1px;
+  position: absolute;
+  margin: 0;
+  top: 1vw;
+  right: 1vw;
+  color: black;
+  text-shadow: 2px 6px 12px rgb(249, 93, 93);
+}
+p {
+  position: absolute;
+  font-size: 3vw;
+  margin: 0;
+  top: 6vw;
+  right: 1vw;
+  color: rgb(0, 0, 0);
+  text-shadow: 0 0 12px rgb(223, 36, 248);
+}
+</style>
+  </head>
+  <body>
+    <h1>bouncing balls</h1>
+    <p>Ball count: 21</p>
+  <button id="evilcircle">Evil Circle</button>
+  <button id="background">Background</button>
+    <canvas></canvas>
+
+<script>
+  var bkgndCol = randomRGB();
+    const btn1 = document.querySelector("#background");
+btn1.addEventListener('click', () => {
+  bkgndCol = randomRGB();
+  //document.body.style.backgroundColor = rndCol;
+});
+  var evilCol = randomRGB();
+    const btn2 = document.querySelector("#evilcircle");
+btn2.addEventListener('click', () => {
+  evilCol = randomRGB();
+  //document.body.style.backgroundColor = rndCol;
+});
+// src="main.js"
+// Thanks to Renan Martineli for this version of the demo
+// setup canvas
+const para = document.querySelector('p');
+let count = 0;
+const canvas = document.querySelector('canvas');
+const ctx = canvas.getContext('2d');
+const width = canvas.width = window.innerWidth;
+const height = canvas.height = window.innerHeight;
+// function to generate random number
+function random(min,max) {
+  const num = Math.floor(Math.random()*(max-min)) + min;
+  return num;
+};
+// function to generate random RGB color value
+function randomRGB() {
+  return `rgb(${random(0, 255)},${random(0, 255)},${random(0, 255)})`;
+}
+class Shape {
+  constructor(x, y, velX, velY) {
+    this.x = x;
+    this.y = y;
+    this.velX = velX;
+    this.velY = velY;
+  }
+}
+class Ball extends Shape {
+  constructor(x, y, velX, velY, color, size) {
+    super(x, y, velX, velY);
+    this.color = color;
+    this.size = size;
+    this.exists = true;
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 3;
+     ctx.fillStyle = this.color;
+    ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.stroke();
+   }
+  update() {
+    if ((this.x + this.size) >= width) {
+      this.velX = -(this.velX);
+    }
+    if ((this.x - this.size) <= 0) {
+      this.velX = -(this.velX);
+    }
+    if ((this.y + this.size) >= height) {
+      this.velY = -(this.velY);
+    }
+    if ((this.y - this.size) <= 0) {
+      this.velY = -(this.velY);
+    }
+    this.x += this.velX;
+    this.y += this.velY;
+  }
+  collisionDetect() {
+     for (const ball of balls) {
+        if (!(this === ball) && ball.exists) {
+           const dx = this.x - ball.x;
+           const dy = this.y - ball.y;
+           const distance = Math.sqrt(dx * dx + dy * dy);
+
+           if (distance < this.size + ball.size) {
+             ball.color = this.color = randomRGB();
+           }
+        }
+     }
+  }
+}
+class EvilCircle extends Shape {
+  constructor(x, y) {
+    super(x, y, 30, 30);
+    this.color = "white";
+    this.size = 60;
+    window.addEventListener('keydown', (e) => {
+      switch(e.key) {
+        case 'ArrowLeft':
+          this.x -= this.velX;
+          break;
+        case 'ArrowRight':
+          this.x += this.velX;
+          break;
+        case 'ArrowUp':
+          this.y -= this.velY;
+          break;
+        case 'ArrowDown':
+          this.y += this.velY;
+          break;
+      }
+    });
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.strokeStyle = this.color;
+    ctx.lineWidth = 3;
+    ctx.fillStyle = evilCol;
+    ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.stroke();
+  }
+  checkBounds() {
+    if ((this.x + this.size) >= width) {
+      this.x -= this.size;
+    }
+    if ((this.x - this.size) <= 0) {
+      this.x += this.size;
+    }
+    if ((this.y + this.size) >= height) {
+      this.y -= this.size;
+    }
+    if ((this.y - this.size) <= 0) {
+      this.y += this.size;
+    }
+  }
+  collisionDetect() {
+    for (const ball of balls) {
+      if (ball.exists) {
+        const dx = this.x - ball.x;
+        const dy = this.y - ball.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance < this.size + ball.size) {
+          ball.exists = false;
+          count--;
+          para.textContent = 'Ball count: ' + count;
+        }
+      }
+    }
+  }
+}
+// define array to store balls and populate it
+const balls = [];
+var initlength = random(10, 35);
+while (balls.length < initlength) {
+  const size = random(25, 60);
+  const ball = new Ball(
+    // ball position always drawn at least one ball width
+    // away from the edge of the canvas, to avoid drawing errors
+    random(0 + size, width - size),
+    random(0 + size, height - size),
+    random(-7, 7),
+    random(-7, 7),
+    randomRGB(),
+    size
+  );
+  balls.push(ball);
+  count++;
+  para.textContent = 'Ball count: ' + count;
+}
+const evilBall = new EvilCircle(random(0, width), random(0, height));
+function loop() {
+  ctx.fillStyle = bkgndCol;
+  ctx.fillRect(0, 0, width, height);
+  for (const ball of balls) {
+    if (ball.exists) {
+      ball.draw();
+      ball.update();
+      ball.collisionDetect();
+    }
+  }
+  evilBall.draw();
+  evilBall.checkBounds();
+  evilBall.collisionDetect();
+  requestAnimationFrame(loop);
+}
+
+loop();
+</script>
+</body></html>

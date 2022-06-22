@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <head>
+    <meta charset="utf-8">
+    <title>Random canvas circles</title>
+    <style>
+      html {
+        width: 100%;
+        height: inherit;
+        background: rgb(20, 10, 49);
+      }
+
+      canvas {
+        display: block;
+      }
+
+      body {
+        margin: 0;
+      }
+
+      button {
+        position: absolute;
+        font-size:xx-large;
+        width: 10vw;
+        height: 2vw;
+        top: 5px;
+        left: 5px;
+      }
+    </style>
+  </head>
+  <body>
+
+  <button>Update</button>
+
+  <canvas></canvas>
+
+
+    <script>
+    const btn = document.querySelector('button');
+    const canvas = document.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
+
+    let WIDTH = document.documentElement.clientWidth;
+    let HEIGHT = document.documentElement.clientHeight;
+
+    canvas.width = WIDTH;
+    canvas.height = HEIGHT;
+
+    function random(number) {
+      return Math.floor(Math.random()*number);
+    }
+
+    function draw() {
+      ctx.clearRect(0,0,WIDTH,HEIGHT);
+      for(let i = 0; i < 100; i++) {
+        ctx.beginPath();
+        ctx.fillStyle = 'rgba('+random(255)+','+random(255)+','+random(255)+',0.7)';
+        ctx.arc(random(WIDTH), random(HEIGHT), random(250), 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.lineWidth = 5;
+        ctx.stroke();
+      }
+    }
+
+    btn.addEventListener('click',draw);
+
+    </script>
+
+  </body>
+</html>

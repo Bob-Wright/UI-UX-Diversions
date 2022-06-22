@@ -1,0 +1,215 @@
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.box{
+    position: relative;
+    width: 600px;
+    height: 600px;
+    border: 5px solid black;
+    display: block;
+    margin: auto;
+    top: 100px;
+    background: #30AADD;
+    border-radius: 10px;
+}
+.headphones{
+    position: absolute;
+    width: 43%;
+    height: 25%;
+    left: 30%;
+    top: 30%;
+z-index: 0;
+}
+.top{
+    border: 15px solid #0E185F;
+    border-bottom: none;
+    width: 75%;
+    height: 50%;
+    position: absolute;
+    background: white;
+    border-top-left-radius: 120px;
+    border-top-right-radius: 120px;
+    left: 12%;
+    background: #30AADD;
+}
+.right{
+    position: absolute;
+    height: 50%;
+    width: 15%;
+    background: #0E185F;
+    border-radius: 10px;
+    left: 75%;
+    top: 35%;
+}
+.right::before{
+    content: '';
+    position: absolute;
+    height: 70%;
+    width: 50%;
+    background: inherit;
+    left: 106%;
+    border-radius: 0 30px 30px 0;
+    top: 15%;
+}
+
+.left{
+    position: absolute;
+    height: 50%;
+    width: 15%;
+    background: #0E185F;
+    border-radius: 10px;
+    left: 9%;
+    top: 35%;
+}
+.left::before{
+    content: '';
+    position: absolute;
+    height: 70%;
+    width: 50%;
+    background: inherit;
+    left: -55%;
+    border-radius: 30px 0 0 30px;
+    top: 15%;
+}
+#smile {
+    position: absolute;
+    top: 52%;
+    left: 48%;
+    width: 8%;
+    height: 1%;
+    border-radius: 0 0 0 0;
+    border: 7px solid #0E185F;
+     border-left: none;
+    border-top: none;
+    background: #30AADD;
+}
+#smile1 {
+    position: absolute;
+    top: 52%;
+    left: 48%;
+    width: 8%;
+    height: 4%;
+   border-radius: 0 0 100px 100px;
+    border: 7px solid #0E185F;
+     border-left: none;
+    border-top: none;
+}
+#smile2 {
+    position: absolute;
+    top: 52%;
+    left: 48%;
+    width: 8%;
+    height: 4%; 
+    border-bottom-left-radius: 110px;  
+    border-bottom-right-radius: 110px;
+    border: 7px solid #0E185F;
+    border-top: 0;
+    transform: rotate(-5deg);
+}
+#smile3 {
+    position: absolute;
+    top: 52%;
+    left: 48%;
+    width: 8%;
+    height: 5%;
+    border-radius: 0 0 100px 100px;
+    border: 7px solid #0E185F;
+    /* border-left: none;
+    border-top: none; */
+}
+#smile4 {
+    position: absolute;
+    top: 52%;
+    left: 48%;
+    width: 8%;
+    height: 6%;
+   border-radius: 0 0 100px 100px;
+    border: 7px solid #0E185F;
+    /* border-left: none;
+    border-top: none; */
+}
+
+.aviators{
+    position: absolute;
+    width: 30%;
+    height: 18%;
+    top: 35%;
+    left: 36%;
+    z-index: 1;
+}
+.left-av{
+    position: absolute;
+    width: 40%;
+    height:65%;
+    background: #0E185F;
+    left: 60%;
+    top: 23%;
+    border-radius: 80% 25% 55% 50% / 55% 25% 80% 50%;
+    border-left: 5px solid #30AADD;
+    border-bottom: 5px solid #30AADD;
+    transform: rotate(220deg);
+}
+.right-av{
+    position: absolute;
+    width: 40%;
+    height:65%;
+    background: #0E185F;
+    left: 3%;
+    top: 23%;
+    border-radius: 80% 25% 55% 50% / 55% 25% 80% 50%;
+    border-left: 5px solid #30AADD;
+    border-bottom: 5px solid #30AADD;
+    transform: rotate(48deg);
+}
+.middle{
+    position: absolute;
+    background: #0E185F;
+    width: 20%;
+    height: 10%;
+    top: 53%;
+    left: 41%;
+}
+
+
+</style>
+<div class="box">
+        <div class="headphones">
+            <div class="top"></div>
+            <div class="left"></div>
+            <div class="right"></div>
+        </div>
+        <div class="aviators">
+            <div class="left-av"></div>
+            <div class="right-av"></div>
+            <div class="middle"></div>
+        </div>
+        <div id="smile" style="display: hidden"></div>
+        <div id="smile1" style="display: hidden"></div>
+        <div id="smile2" style="display: hidden"></div>
+        <div id="smile3" style="display: hidden"></div>
+        <div id="smile4" style="display: hidden"></div>
+    </div>
+<script src="./jquery.min.js"></script>
+<script>
+$( window ).on( "load", function() {
+	console.info( "we are ready!" );
+	setTimeout(function() {
+	$("#smile").hide(0);
+	$("#smile1").hide(0);
+	$("#smile2").hide(0);
+	$("#smile3").hide(0);
+	$("#smile4").hide(0);
+	}, 0);
+	setTimeout(function() {$("#smile").show(200);}, 250);
+	setTimeout(function() {$("#smile1").show(200);$("#smile").hide(0);}, 600);
+	setTimeout(function() {$("#smile2").show(200);$("#smile1").hide(0);}, 1000);
+	setTimeout(function() {$("#smile3").show(200);$("#smile2").hide(0);}, 1400);
+	setTimeout(function() {$("#smile4").show(200);$("#smile3").hide(0);}, 1800);
+	setTimeout(function() {$("#smile3").show(200);$("#smile4").hide(0);}, 2200);
+	setTimeout(function() {$("#smile2").show(200);$("#smile3").hide(0);}, 2600);
+	setTimeout(function() {$("#smile1").show(200);$("#smile2").hide(0);}, 3000);
+});
+</script>

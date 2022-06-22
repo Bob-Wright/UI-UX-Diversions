@@ -1,0 +1,253 @@
+<html lang = "en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+  width: 100%;
+  height: 100vh;
+  background:#000;
+}
+.card {
+ position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255,255,255,0.1);
+  width: 50vw;
+  height: 50vh;
+  border-radius: 2vw;
+  border: .2vw solid red;
+  box-shadow: 20px 20px 20px  -10px white;
+  border-right: 1px solid rgba(255,255,255,0.2);
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+.message {
+font-size: 5vw;
+color: rgb(245, 253, 225);
+padding: 1vw;
+}
+.msgtext {
+font-size: 4vw;
+color: rgb(251, 126, 232);
+padding: 1vw;
+}
+/* avatar box styles */
+.box{
+    position: relative;
+    width: 20vw;
+    height: 15vw;
+    border: 5px solid black;
+    display: block;
+    margin: auto;
+    top: 3vw;
+    background: #30AADD;
+    border-radius: 10px;
+}
+.headphones{
+    position: absolute;
+    width: 64%;
+    height: 50%;
+    left: 17%;
+    top: 15%;
+z-index: 0;
+}
+.top{
+    border: 15px solid #0E185F;
+    border-bottom: none;
+    width: 75%;
+    height: 50%;
+    position: absolute;
+    border-top-left-radius: 120px;
+    border-top-right-radius: 120px;
+    left: 12%;
+}
+.right{
+    position: absolute;
+    height: 50%;
+    width: 15%;
+    background: #0E185F;
+    border-radius: 10px;
+    left: 75%;
+    top: 35%;
+}
+.right::before{
+    content: '';
+    position: absolute;
+    height: 70%;
+    width: 50%;
+    background: inherit;
+    left: 106%;
+    border-radius: 0 30px 30px 0;
+    top: 15%;
+}
+
+.left{
+    position: absolute;
+    height: 50%;
+    width: 15%;
+    background: #0E185F;
+    border-radius: 10px;
+    left: 9%;
+    top: 35%;
+}
+.left::before{
+    content: '';
+    position: absolute;
+    height: 70%;
+    width: 50%;
+    background: inherit;
+    left: -55%;
+    border-radius: 30px 0 0 30px;
+    top: 15%;
+}
+#smile {
+    position: absolute;
+    top: 64%;
+    left: 43%;
+    width: 12%;
+    height: 1%;
+    border-radius: 0 0 0 0;
+    border: 7px solid #0E185F;
+     border-left: none;
+    border-top: none;
+}
+#smile1 {
+    position: absolute;
+    top: 64%;
+    left: 43%;
+    width: 12%;
+    height: 6%;
+   border-radius: 0 0 100px 100px;
+    border: 7px solid #0E185F;
+     border-left: none;
+    border-top: none;
+}
+#smile2 {
+    position: absolute;
+    top: 64%;
+    left: 43%;
+    width: 12%;
+    height: 6%; 
+    border-bottom-left-radius: 110px;  
+    border-bottom-right-radius: 110px;
+    border: 7px solid #0E185F;
+    border-top: 0;
+    transform: rotate(-5deg);
+}
+#smile3 {
+    position: absolute;
+    top: 64%;
+    left: 43%;
+    width: 12%;
+    height: 7%;
+    border-radius: 0 0 100px 100px;
+    border: 7px solid #0E185F;
+    /* border-left: none;
+    border-top: none; */
+}
+#smile4 {
+    position: absolute;
+    top: 64%;
+    left: 43%;
+    width: 12%;
+    height: 9%;
+   border-radius: 0 0 100px 100px;
+    border: 7px solid #0E185F;
+    /* border-left: none;
+    border-top: none; */
+}
+
+.aviators{
+    position: absolute;
+    width: 31%;
+    height: 34%;
+    top: 28%;
+    left: 33%;
+    z-index: 1;
+}
+.left-av{
+    position: absolute;
+    width: 40%;
+    height:65%;
+    background: #074401;
+    left: 60%;
+    top: 23%;
+    border-radius: 80% 25% 55% 50% / 55% 25% 80% 50%;
+    border-left: 4px solid #d9fe8a;
+    border-bottom: 5px solid #30AADD;
+    transform: rotate(220deg);
+}
+.right-av{
+    position: absolute;
+    width: 40%;
+    height:65%;
+    background: #074401;
+    left: 3%;
+    top: 23%;
+    border-radius: 80% 25% 55% 50% / 55% 25% 80% 50%;
+    border-left: 4px solid #d9fe8a;
+    border-bottom: 5px solid #30AADD;
+    transform: rotate(48deg);
+}
+.middle{
+    position: absolute;
+    background: #e0e637;
+    width: 13%;
+    height: 6%;
+    top: 53%;
+    left: 41%;
+}
+
+</style>
+<body>
+<div class="card">
+<div class="message">Message:</div>
+<div class="msgtext">The message text goes here!</div>
+<div class="box">
+        <div class="headphones">
+            <div class="top"></div>
+            <div class="left"></div>
+            <div class="right"></div>
+        </div>
+        <div class="aviators">
+            <div class="left-av"></div>
+            <div class="right-av"></div>
+            <div class="middle"></div>
+        </div>
+        <div id="smile" style="display: none"></div>
+        <div id="smile1" style="display: none"></div>
+        <div id="smile2" style="display: none"></div>
+        <div id="smile3" style="display: none"></div>
+        <div id="smile4" style="display: none"></div>
+    </div>
+</div>
+<script src="./jquery.min.js"></script>
+<script>
+$( window ).on( "load", function() {
+	console.info( "we are ready!" );
+	setTimeout(function() {
+	$("#smile").hide(0);
+	$("#smile1").hide(0);
+	$("#smile2").hide(0);
+	$("#smile3").hide(0);
+	$("#smile4").hide(0);
+	}, 0);
+	setTimeout(function() {$("#smile").show(200);}, 250);
+	setTimeout(function() {$("#smile1").show(200);$("#smile").hide(0);}, 600);
+	setTimeout(function() {$("#smile2").show(200);$("#smile1").hide(0);}, 1000);
+	setTimeout(function() {$("#smile3").show(200);$("#smile2").hide(0);}, 1400);
+	setTimeout(function() {$("#smile4").show(200);$("#smile3").hide(0);}, 1800);
+	setTimeout(function() {$("#smile3").show(200);$("#smile4").hide(0);}, 2200);
+	setTimeout(function() {$("#smile2").show(200);$("#smile3").hide(0);}, 2600);
+	setTimeout(function() {$("#smile1").show(200);$("#smile2").hide(0);}, 3000);
+});
+</script></body>
+</html>
